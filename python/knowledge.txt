@@ -1,0 +1,34 @@
+TRAINING SESSION of 23/02/2026
+
+WHAT I LEARNED
+
+- How to use the sorted function to perform a multi-criteria sorting. It's using the key property with a tuple.
+
+- To create your own exception, you need to define a class heriting from Exception. You can either give it 
+custom properties or leave it empty with the keyword pass. Then you can use it by using "raise" and giving it 
+an error message which is already included in the Exception class.
+
+- There are built-in exception classes in Python that you don't need to re-implement. The most common ones are :
+ValueError, TypeError, KeyError, ZeroDivisionError.
+
+- A set doesn't guarantee the order of its elements. They can appear in a different order each time you access
+the variable. That's way set elements should never be accessed through index or key.
+
+- The syntax for sorted and filter is similar but can be confusing :
+    sorted(my_list, key= lambda x: x['my_attribute'])
+    filter(lambda x: x['amount'] >= 50, my_list)
+
+- defaultdict is a sub-class allowing to create an empty dict where empty values are automatically filled.
+For example, new_dict = defaultdict(int). This avoids KeyError. You could also use get. The difference is that
+defaultdict modify the dictionnary whereas get doesn't.
+
+- To format a string easily, use fstring. 
+Instead of  str(doc["id"]) + " - " + doc["title"]
+Prefer      f'{doc["id"]} - {doc["title"]}'
+
+- Instead of using filter, you can often use a clearer list comprehension
+Instead of filter(lambda x: x['amount'] >= 50, my_list)
+Prefer     [x for x in my_list if x['amount'] >= 50]
+
+- When python is iterating over a dict, it iterates over the keys, not the values. 
+That’s why you have to use dict.items() or dict.values() to iterate.
