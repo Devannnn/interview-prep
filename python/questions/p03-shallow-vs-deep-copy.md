@@ -1,4 +1,4 @@
-# What is the difference between a shallow copy and a deep copy?
+Q. What is the difference between a shallow copy and a deep copy?
 
 Both are methods to make a copy of a Python object. The difference lays in the recursivity of the copy.
 

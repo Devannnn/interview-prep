@@ -1,4 +1,4 @@
-# What is the difference between args and kwargs? Write a function that accepts both and prints them.
+Q. What is the difference between args and kwargs? Write a function that accepts both and prints them.
 
 To understand args and kwards, you must first understand positional and keyword arguments.
 

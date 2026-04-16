@@ -1,4 +1,4 @@
-# What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.
+Q. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.
 
 A generator is a type of iterator that produces elements lazily.
 

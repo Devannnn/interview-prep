@@ -1,4 +1,4 @@
-# Explain the difference between @staticmethod and @classmethod. When would you use each?
+Q. Explain the difference between @staticmethod and @classmethod. When would you use each?
 
 Class methods and static methods are specific types of methods in Python that are logically bound to a class rather than to its instances.
 

@@ -1,4 +1,4 @@
-# What are the differences between a list, tuple, and set in Python? When would you choose one over the others?
+Q. What are the differences between a list, tuple, and set in Python? When would you choose one over the others?
 
 Lists, tuples and sets are all collections types in Python but they differ in ordering and mutability which make them useful for different usecases.
 

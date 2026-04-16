@@ -1,4 +1,4 @@
-# What is GIL in Python ?
+Q. What is GIL in Python ?
 
 Python’s Global Interpret Lock (GIL) is a mutex that prevents multiple threads from executing Python bytecode simultaneously. It means that even if it seems that your code is running with multiple threads, only one thread at a time actually run the bytecode.
 

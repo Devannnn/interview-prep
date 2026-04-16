@@ -1,4 +1,4 @@
-# How do you configure CORS with Flask ?
+Q. How do you configure CORS with Flask ?
 
 In Flask, it would be :
 ```
