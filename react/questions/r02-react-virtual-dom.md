@@ -1,4 +1,4 @@
-# Why does React use a Virtual DOM?
+# What's the Virtual DOM ? Why does React use a Virtual DOM?
 
 ## Why recruiters ask this
 - Tests conceptual understanding of rendering performance.
