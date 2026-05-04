@@ -1,1 +1,0 @@
-Q. What's the DOM ?

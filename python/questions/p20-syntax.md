@@ -1,1 +1,0 @@
-Q. What does func(**some_dict) do in Python? 
