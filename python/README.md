@@ -630,7 +630,65 @@ print(clio.counter)   # 2
 print(tesla.counter)  # 2
 
 ```
+</details>
 
 
+
+#### 25. What is the difference between `else` and `finally` in a `try` statement?
+
+<details>
+<summary>Reveal answer</summary>
+The `finally` block runs no matter what: whether the `try` block succeeds, raises an exception that is caught, or raises an exception that is not caught. It is usually used for cleanup, like closing files or releasing resources.
+
+The `else` block runs only if the `try` block completes successfully without raising an exception. It is useful for code that should run only when no error occurred.
+</details>
+
+
+#### 26. What is the standard library in Python ?
+
+<details>
+<summary>Reveal answer</summary>
+
+Python follows a philosophy called "batteries included" which mean that when you download an interpreter for python, it comes bundled with a collection of modules and packages called "the standard library".
+
+The idea is that common tasks should be immediately available to users without them needing to download external packages.
+
+Some examples of those standard libraries:
+
+- `datetime` for dates and times manipulation
+- `logging` for logs
+- `unittest` for testing
+- `json` for json manipulation
+- `math` to get advanced math functions
+
+Many believe that the success of Python is partly due to this philosophy. Developers can solve many everyday problems using reliable, built-in modules instead of reimplementing common functionality or immediately depending on external libraries.
 
 </details>
+
+
+#### 27. What's the difference between a module, a package and a library ?
+
+<details>
+<summary>Reveal answer</summary>
+A module is a single Python file `.py`.
+
+A package is a folder containing several modules.
+
+Modules and packages have a concrete meaning linked to the file structure. On the other hand, a library is more conceptual.
+
+A library is a collection of reusable code designed to solve related problems. A library can be composed of one module, one package or several packages. The important part is that all of them provide functionnality around the same topic.
+</details>
+
+
+
+#### 28. When would you define a custom exception class?
+
+<details>
+<summary>Reveal answer</summary>
+A good practice is to define a custom exception when your application has a domain-specific error that you want to identify or handle separately.
+
+You could raise a built-in exception for domain-specific errors - for example raise a ValueError for an invalid payment. It's not optimal though because many scenarios could lead to a ValueError exception and it could come from many places.
+
+Whereas, if you define your own Exception - like InvalidPaymentError - you know right away what kind of error occurred and you can handle them separately.
+</details>
+
