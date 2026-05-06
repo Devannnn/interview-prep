@@ -60,21 +60,32 @@ When you create a generator, you literally say to Python "here's how to produce 
 see it as a way to get a sequence of elements but instead of having the entire list stored in memory, you just tell Python
 how to produce each element and it will gives them one at a time.
 
+```python
 def square_nums(n):
     for i in range(1,n+1):
         yield i*i
+```
 
 Notice that we don't use return like for a list but yield. You can read yield as "put this element next in the generator".
 
 Generator are often used with comprehensions. The previous example would look like this :
+
+```python
 square_nums_generator = (i*i for i in range(1, n+1))
+```
 
 Then you would consume this generator like this :
+
+```python
 print(next square_nums_generator) # Literally print the next element of the generator
+```
 
 Or if you want to print the entire sequence :
+
+```python
 for num in square_nums_generator:
     print(num)
+```
 
 The purpose of generator is to give a memory-performant way to deal with large set of data. Generator are way more memory efficient than list. 
 
@@ -111,6 +122,7 @@ A deepcopy makes a complete copy of the object meaning that it recursively copie
 
 A common bug is to use copy on an object with nested objects inside, thinking that you can now mutate the copy without modifying the original version. But because the copy contains references (and not duplicates) of the nested objects, it will actually modify also the original.
 
+```python
 a = {
     user : {
         name: "Test",
@@ -121,6 +133,7 @@ a = {
 b = a.copy()
 b["user"]["age"] = 10
 print(a["user"]["age"]) // returns 10
+```
 
 </details>
 
@@ -133,18 +146,26 @@ print(a["user"]["age"]) // returns 10
 
 Class methods and static methods are specific types of methods in Python that are logically bound to a class rather than to its instances.
 
+```python
 class Person:
     def __init__(self, name, age):
         self.name = name
         self.age = age
     
+    # This is an instance method
+    def who(self):
+        print(f"I am {self.name}")
+    
+    # This is a class method
     @classmethod
     def from_birth_year(cls, name, year):
         return cls(name, date.today().year - year)
     
+    # This is  a static method
     @staticmethod
     def is_adult(age):
         return age >= 18
+```
 
 A class method is a method that receives the class itself as the first parameter - conventionally named cls. Those are often used to defined factory methods i.e. other ways to create an instance of that class.
 
@@ -167,11 +188,13 @@ A positional argument is an argument passed based on its order in the function c
 
 A keyword argument is an argument passed based on the parameter name.
 
+```python
 def print_info(name, age):
     print(f'name : {name}, age : {age}')
 
 print_info('fake_name', 20)
 print_info(name='fake_name', age=20)
+```
 
 In Python, keywords arguments can only be placed after positional arguments.
 
@@ -181,12 +204,14 @@ The difference is that args collects additional positional parameters in a tuple
 
 The names args and kwargs are conventions. What really matters are the symbols * and **.
 
+```python
 def print_args(*args, **kwargs):
     for arg in args:
         print(arg)
     
     for key, value in kwargs.items():
         print(value)
+```
 
 </details>
 
@@ -206,49 +231,49 @@ But, there are scenarios where we have instructions that take time to perform be
 That's what asynchronous programming is for. It's a tool to write this efficient, non-blocking code.
 
 Here's an example :
+
+```python
 import time
 import asyncio
 from typing import List, Dict
 
 async def process_order(order_id: int, processing_time: float) -> Dict:
-'''Simulate processing a single order.'''
-print(f'Starting to process order {order_id}')
-await asyncio.sleep(processing_time)  # Simulate I/O work (e.g., database/API calls)
-print(f'Finished processing order {order_id}')
-return {
-'order_id': order_id,
-'status': 'completed',
-'processing_time': processing_time
-}
+    # Simulate processing a single order.
+    print(f'Starting to process order {order_id}')
+    await asyncio.sleep(processing_time)  # Simulate I/O work (e.g., database/API calls)
+    print(f'Finished processing order {order_id}')
+    return {
+    'order_id': order_id,
+    'status': 'completed',
+    'processing_time': processing_time
+    }
 
-async def process_orders(orders: List[Dict]) -> List[Dict]:
-'''Process multiple orders concurrently.'''
-tasks = [
-process_order(order['id'], order['processing_time'])
-for order in orders
-]
-return await asyncio.gather(*tasks)
+    async def process_orders(orders: List[Dict]) -> List[Dict]:
+    # Process multiple orders concurrently.
+    tasks = [
+    process_order(order['id'], order['processing_time'])
+    for order in orders
+    ]
+    return await asyncio.gather(*tasks)
 
 async def main():
+    # Simulate different orders with varying processing times
+    orders = [
+        {'id': 1, 'processing_time': 2},  # Takes 2 seconds
+        {'id': 2, 'processing_time': 1},  # Takes 1 second
+        {'id': 3, 'processing_time': 3},  # Takes 3 seconds
+    ]
 
-```
-# Simulate different orders with varying processing times
-orders = [
-    {'id': 1, 'processing_time': 2},  # Takes 2 seconds
-    {'id': 2, 'processing_time': 1},  # Takes 1 second
-    {'id': 3, 'processing_time': 3},  # Takes 3 seconds
-]
+    print('Starting order processing...')
+    start_time = time.time()
 
-print('Starting order processing...')
-start_time = time.time()
+    results = await process_orders(orders)
 
-results = await process_orders(orders)
+    end_time = time.time()
+    total_time = end_time - start_time
 
-end_time = time.time()
-total_time = end_time - start_time
-
-print(f'\\nProcessed {len(results)} orders in {total_time:.2f} seconds')
-print(f'Individual results: {results}')
+    print(f'\\nProcessed {len(results)} orders in {total_time:.2f} seconds')
+    print(f'Individual results: {results}')
 ```
 
 Now what's the difference with multi-threading ?
@@ -483,3 +508,129 @@ Those two are separated because they can evolve independently - you might want t
 </details>
 
 ---
+
+#### 22. What's the method `zip` for in Python ?
+
+<details>
+<summary>Reveal answer</summary>
+
+How I loop over several iterables at the same time ? With `zip`.
+
+The `zip` takes several iterable and create a generator which pairs each element based on their index. It stops at the shortest iterable.
+
+```python
+names = ["Alice", "Bob", "Charlie", "Delta"]
+scores = [90, 75, 88]
+for name, score in zip(names, scores):
+    print(name, score)
+   
+// Alice 90
+// Bob 75
+// Charlie 88
+```
+
+A cool usecase for zip is when you need to create a dictionnary out of several lists.
+
+```python
+names = ["Alice", "Bob", "Charlie", "Delta"]
+scores = [90, 75, 88]
+new_dict = dict(zip(names, scores))
+// {'Alice': 90, 'Bob': 75, 'Charlie': 88}
+```
+
+</details>
+
+
+#### 23. What's a comprehension in Python ?
+
+<details>
+<summary>Reveal answer</summary>
+
+A comprehension is a compact syntax to create collections from an iterable.
+
+It's used to contain all the logic to create a collection in a single readable expression.
+
+```python
+# Instead of writing
+result = []
+for x in iterable:
+    if condition(x):
+        result.append(transform(x))
+
+# You write
+result = [transform(x) for x in iterable if condition(x)]
+```python
+
+There is a comprehension for almost each type of collection: list, set, dict.
+
+```python
+[x for x in items]          # list comprehension
+
+{x for x in items}          # set comprehension
+
+{k: v for k, v in pairs}    # dict comprehension
+```
+
+</details>
+
+
+#### 24. What's the different types of attributes in a class ?
+
+<details>
+<summary>Reveal answer</summary>
+There are two different types of attributes : instance attribute and class attribute.
+
+Instance attributes are defined at the instance level and are stored in the instance. 
+
+Class attributes are defined at the class level and are shared between instances. It's used to provide configuration and shared state across instances.
+
+```python
+class Car:
+    working = False # Class attribute
+    
+    def __init__(self, name):
+	    self.name = name # Instance attribute
+
+clio = Car("clio")
+tesla = Car("tesla")
+```
+
+A class attribute cannot be reassigned by the instance. If an instance tries to reassign a class attribute, it will create an instance attribute that shadows the class attribute *for this instance*.
+
+```python
+class Car:
+    working = False # Class attribute
+    
+    def __init__(self, name):
+	    self.name = name # Instance attribute
+
+clio = Car("clio")
+tesla = Car("tesla")
+
+clio.working = True
+print(clio.working) # True
+print(tesla.working) # False
+```
+
+However, a class attribute can be *updated* at the class level. In that case, the attribute is modified for all instances. That's useful to create a shared state.
+
+
+```python
+class Car:
+    counter = 0 # Class attribute
+    
+    def __init__(self, name):
+	    self.name = name # Instance attribute
+        Car.counter += 1
+
+clio = Car("clio")
+tesla = Car("tesla")
+
+print(clio.counter)   # 2
+print(tesla.counter)  # 2
+
+```
+
+
+
+</details>

@@ -32,3 +32,20 @@ Prefer     [x for x in my_list if x['amount'] >= 50]
 
 - When python is iterating over a dict, it iterates over the keys, not the values. 
 That’s why you have to use dict.items() or dict.values() to iterate.
+
+
+TRAINING SESSION of 05/05/2026
+In Python, everything is an object. In some languages like Java, there is a distinction 
+between objects and primitive types like integer or boolean. In Python, you don’t have 
+that distinction. Even integers are objects.
+
+What does that change ? One practical consequence of this is that values have in-built 
+attributes and methods that you can use. For example, 
+
+```python
+name = "Alice"
+name.upper() 
+
+number = 42
+number.bit_length() 
+```
