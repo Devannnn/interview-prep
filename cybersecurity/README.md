@@ -3,12 +3,13 @@
 ## Table of contents
 
 - [1. What's the difference between identification, authentication and authorization ?](#1-whats-the-difference-between-identification-authentication-and-authorization)
-- [2. What's a JWT ?](#2-whats-a-jwt)
-- [3. What's a cookie ?](#3-whats-a-cookie)
-- [4. Where can you store a JWT on the frontend? What are the security trade-offs of each?](#4-where-can-you-store-a-jwt-on-the-frontend-what-are-the-security-trade-offs-of-each)
-- [5. What's an XSS ? Why is storing a JWT in sessionStorage vulnerable to XSS?](#5-whats-an-xss-why-is-storing-a-jwt-in-sessionstorage-vulnerable-to-xss)
-- [6. What's a CSRF ? Why would storing a JWT in an httpOnly cookie make it immune to XSS but exposed to CSRF?](#6-whats-a-csrf-why-would-storing-a-jwt-in-an-httponly-cookie-make-it-immune-to-xss-but-exposed-to-csrf)
+- [2. What's a cookie ?](#2-whats-a-cookie)
+- [3. What's a JWT ?](#3-whats-a-jwt)
+- [4. What's an XSS ? Why is storing a JWT in sessionStorage vulnerable to XSS?](#4-whats-an-xss-why-is-storing-a-jwt-in-sessionstorage-vulnerable-to-xss)
+- [5. What's a CSRF ? Why would storing a JWT in an httpOnly cookie make it immune to XSS but exposed to CSRF?](#5-whats-a-csrf-why-would-storing-a-jwt-in-an-httponly-cookie-make-it-immune-to-xss-but-exposed-to-csrf)
+- [6. Where can you store a JWT on the frontend? What are the security trade-offs of each?](#6-where-can-you-store-a-jwt-on-the-frontend-what-are-the-security-trade-offs-of-each)
 - [7. How do you protect against CSRF when your JWT is in an httpOnly cookie?](#7-how-do-you-protect-against-csrf-when-your-jwt-is-in-an-httponly-cookie)
+- [8. What’s CORS ?](#8-whats-cors)
 
 ---
 
@@ -27,7 +28,20 @@ Authorization is the answer to "What are you allowed to do". After a server veri
 
 ---
 
-#### 2. What's a JWT ?
+#### 2. What's a cookie ?
+
+<details>
+<summary>Reveal answer</summary>
+
+A cookie is a small piece of data sent by a server to a browser via a response with a `Set-Cookie` header. The browser stores it on the client's machine and includes it in the header of all the subsequent requests to this subdomain. Cookies can be used for many things - identification, user preferences, tracking - and can be configured using flags to manage their behavior.
+
+The main difference between cookies and other storage mechanisms like localStorage or sessionStorage is that they are automatic. The browser stores them automatically on reception and attaches them automatically to the requests - without any javascript involved.
+
+</details>
+
+---
+
+#### 3. What's a JWT ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -66,39 +80,7 @@ Second, because of the signature, an attacker cannot create or modify a token. E
 
 ---
 
-#### 3. What's a cookie ?
-
-<details>
-<summary>Reveal answer</summary>
-
-A cookie is a small piece of data sent by a server to a browser via a response with a `Set-Cookie` header. The browser stores it on the client's machine and includes it in the header of all the subsequent requests to this subdomain. Cookies can be used for many things - identification, user preferences, tracking - and can be configured using flags to manage their behavior.
-
-The main difference between cookies and other storage mechanisms like localStorage or sessionStorage is that they are automatic. The browser stores them automatically on reception and attaches them automatically to the requests - without any javascript involved.
-
-</details>
-
----
-
-#### 4. Where can you store a JWT on the frontend? What are the security trade-offs of each?
-
-<details>
-<summary>Reveal answer</summary>
-
-There are four main ways to store a JWT on the frontend: localStorage, sessionStorage, cookies or an in-memory javascript variable.
-
-localStorage and sessionStorage are two simple javascript object in the browser. The advantage is that they're easy to use, you don't need to configure anything, just store the JWT and send it as a header in your requests. The disadvantage is that they're stored directly in the javascript of the browser so they're vulnerable to XSS attacks.
-
-sessionStorage is cleared when the tab is closed whereas localStorage persists until explicitly deleted. Because of that, sessionStorage is slightly safer than localStorage.
-
-cookies are stored in a file on the client's machine. The advantage of cookies is that they're automatically stored by the browser and they're not vulnerable to XSS attacks if you use the `httpOnly` flag. However, they're automatically attached to every request by the browser which makes them vulnerable to CSRF attacks.
-
-Finally, you could store the JWT on an in-memory variable like a React state. This would be the most secure against XSS and CSRF attacks since it's not persisted nor sent automatically. But because it's not persisted, it means it's cleared at each refresh which means user has to re-authenticate.
-
-</details>
-
----
-
-#### 5. What's an XSS ? Why is storing a JWT in sessionStorage vulnerable to XSS?
+#### 4. What's an XSS ? Why is storing a JWT in sessionStorage vulnerable to XSS?
 
 <details>
 <summary>Reveal answer</summary>
@@ -115,12 +97,12 @@ So if a JWT is stored in sessionStorage, it could be retrieved by a malicious sc
 
 ---
 
-#### 6. What's a CSRF ? Why would storing a JWT in an httpOnly cookie make it immune to XSS but exposed to CSRF?
+#### 5. What's a CSRF ? Why would storing a JWT in an httpOnly cookie make it immune to XSS but exposed to CSRF?
 
 <details>
 <summary>Reveal answer</summary>
 
-A CSRF is a kind of attack where an attacker tricks the victim's browser into sending an HTTP request to a target website *on behalf of the user*.
+A CSRF, or Cross-Site Request Forgery, is an attack where a malicious site causes the user’s browser to send an authenticated request to another site where the user is already logged in.
 
 This attack takes advantage of a core feature of cookies: they're attached automatically to the request by the browser.
 
@@ -131,6 +113,25 @@ Now coming back to storing JWT in a cookie instead of localStorage/sessionStorag
 Storing a JWT in a httpOnly cookie protects it from XSS attacks because javascript cannot access httpOnly cookies. But, it means that those cookies are sent automatically by the browser and could therefore be used by a CSRF attack. 
 
 The key difference between XSS and CSRF here is that CSRF is a blind-attack. XSS allows the attacker to see and retrieve sensitive information from the victim's browser. On the other hand, in a CSRF attack, the attacker never sees the cookie nor the result from the request because all was done by the victim's browser. But the action was performed. XSS is used to steal information whereas CSRF is used to perform malicious actions.
+
+</details>
+
+---
+
+#### 6. Where can you store a JWT on the frontend? What are the security trade-offs of each?
+
+<details>
+<summary>Reveal answer</summary>
+
+There are four main ways to store a JWT on the frontend: localStorage, sessionStorage, cookies or an in-memory javascript variable.
+
+localStorage and sessionStorage are two simple javascript object in the browser. The advantage is that they're easy to use, you don't need to configure anything, just store the JWT and send it as a header in your requests. The disadvantage is that they're stored directly in the javascript of the browser so they're vulnerable to XSS attacks.
+
+sessionStorage is cleared when the tab is closed whereas localStorage persists until explicitly deleted. Because of that, sessionStorage is slightly safer than localStorage.
+
+cookies are stored in a file on the client's machine. The advantage of cookies is that they're automatically stored by the browser and they're not vulnerable to XSS attacks if you use the `httpOnly` flag. However, they're automatically attached to every request by the browser which makes them vulnerable to CSRF attacks.
+
+Finally, you could store the JWT on an in-memory variable like a React state. This would be the most secure against XSS and CSRF attacks since it's not persisted nor sent automatically. But because it's not persisted, it means it's cleared at each refresh which means user has to re-authenticate.
 
 </details>
 
@@ -165,3 +166,11 @@ For several reasons:
 </details>
 
 ---
+
+#### 8. What’s CORS ?
+
+<details>
+<summary>Reveal answer</summary>
+
+CORS, or Cross-Origin Resource Sharing, is a browser security mechanism that controls whether JavaScript from one origin is allowed to access resources from another origin. It mainly protects response access in the browser.
+</details>

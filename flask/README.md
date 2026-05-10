@@ -2,31 +2,57 @@
 
 ## Table of contents
 
-- [1. How does routing work in Flask?](#1-how-does-routing-work-in-flask)
-- [2. How do you handle JSON data in Flask?](#2-how-do-you-handle-json-data-in-flask)
-- [3. How do you structure a REST API for a document system?](#3-how-do-you-structure-a-rest-api-for-a-document-system)
-- [4. What is a Flask blueprint and why use it?](#4-what-is-a-flask-blueprint-and-why-use-it)
-- [5. How do you validate data received by an API?](#5-how-do-you-validate-data-received-by-an-api)
-- [6. How do you handle HTTP errors in a Flask API?](#6-how-do-you-handle-http-errors-in-a-flask-api)
+- [1. What does passing __name__ to Flask() do, and why does it matter?](#1-what-does-passing-name-to-flask-do-and-why-does-it-matter)
+- [2. What does app.run() do, why shouldn't you use it in production, and what do you use instead?](#2-what-does-apprun-do-why-shouldnt-you-use-it-in-production-and-what-do-you-use-instead)
+- [3. How does routing work in Flask?](#3-how-does-routing-work-in-flask)
+- [4. How do you handle JSON data in Flask?](#4-how-do-you-handle-json-data-in-flask)
+- [5. How does Flask expose query-string parameters ?](#5-how-does-flask-expose-query-string-parameters)
+- [6. What is the `instance/` folder for ?](#6-what-is-the-instance-folder-for)
 - [7. How do you configure CORS with Flask ?](#7-how-do-you-configure-cors-with-flask)
-- [8. What's the factory pattern ? Give an example of use with Flask.](#8-whats-the-factory-pattern-give-an-example-of-use-with-flask)
-- [9. What does passing __name__ to Flask() do, and why does it matter?](#9-what-does-passing-name-to-flask-do-and-why-does-it-matter)
-- [10. What does app.run() do, why shouldn't you use it in production, and what do you use instead?](#10-what-does-apprun-do-why-shouldnt-you-use-it-in-production-and-what-do-you-use-instead)
-- [11. Why does Flask-SQLAlchemy use a two-step pattern (create a module-level `db`, then call `db.init_app(app)` inside the app factory) instead of tying the extension to a single global app at import time? What problems does that solve for imports and configuration?](#11-why-does-flask-sqlalchemy-use-a-two-step-pattern-create-a-module-level-db-then-call-dbinit-appapp-inside-the-app-factory-instead-of-tying-the-extension-to-a-single-global-app-at-import-time-what-problems-does-that-solve-for-imports-and-configuration)
-- [12. What is the application context and why do we need it?](#12-what-is-the-application-context-and-why-do-we-need-it)
-- [13. How SQLAlchemy knows which tables to create in the database ?](#13-how-sqlalchemy-knows-which-tables-to-create-in-the-database)
-- [14. What is the `instance/` folder for ?](#14-what-is-the-instance-folder-for)
-- [15. What is the difference between `db.session.add()` and `db.session.commit()`? Why do we have this two-step process ?](#15-what-is-the-difference-between-dbsessionadd-and-dbsessioncommit-why-do-we-have-this-two-step-process)
-- [16. Explain each layer of a standard Flask app : route, model, service.](#16-explain-each-layer-of-a-standard-flask-app-route-model-service)
-- [17. Why can you not pass a SQLAlchemy model instance directly to `jsonify()` ?](#17-why-can-you-not-pass-a-sqlalchemy-model-instance-directly-to-jsonify)
-- [18. What's `app.test_client()` for in Flask ?](#18-whats-apptest-client-for-in-flask)
-- [19. How does Flask expose query-string parameters ?](#19-how-does-flask-expose-query-string-parameters)
-- [20. How do `Mapped[...]` annotations and `mapped_column()` work together in SQLAlchemy 2.x style models?](#20-how-do-mapped-annotations-and-mapped-column-work-together-in-sqlalchemy-2x-style-models)
-- [21. How do you link the Flask application with the database ? Why in that order ?](#21-how-do-you-link-the-flask-application-with-the-database-why-in-that-order)
+- [8. How do you handle HTTP errors in a Flask API?](#8-how-do-you-handle-http-errors-in-a-flask-api)
+- [9. How do you validate data received by an API?](#9-how-do-you-validate-data-received-by-an-api)
+- [10. What is a Flask blueprint and why use it?](#10-what-is-a-flask-blueprint-and-why-use-it)
+- [11. How do you structure a REST API for a document system?](#11-how-do-you-structure-a-rest-api-for-a-document-system)
+- [12. What's the factory pattern ? Give an example of use with Flask.](#12-whats-the-factory-pattern-give-an-example-of-use-with-flask)
+- [13. What is the difference between `db.session.add()` and `db.session.commit()`? Why do we have this two-step process ?](#13-what-is-the-difference-between-dbsessionadd-and-dbsessioncommit-why-do-we-have-this-two-step-process)
+- [14. How SQLAlchemy knows which tables to create in the database ?](#14-how-sqlalchemy-knows-which-tables-to-create-in-the-database)
+- [15. How do you link the Flask application with the database ? Why in that order ?](#15-how-do-you-link-the-flask-application-with-the-database-why-in-that-order)
+- [16. What is the application context and why do we need it?](#16-what-is-the-application-context-and-why-do-we-need-it)
+- [17. Why does Flask-SQLAlchemy use a two-step pattern (create a module-level `db`, then call `db.init_app(app)` inside the app factory) instead of tying the extension to a single global app at import time? What problems does that solve for imports and configuration?](#17-why-does-flask-sqlalchemy-use-a-two-step-pattern-create-a-module-level-db-then-call-dbinit-appapp-inside-the-app-factory-instead-of-tying-the-extension-to-a-single-global-app-at-import-time-what-problems-does-that-solve-for-imports-and-configuration)
+- [18. Why can you not pass a SQLAlchemy model instance directly to `jsonify()` ?](#18-why-can-you-not-pass-a-sqlalchemy-model-instance-directly-to-jsonify)
+- [19. What's `app.test_client()` for in Flask ?](#19-whats-apptest-client-for-in-flask)
+- [20. Explain each layer of a standard Flask app : route, model, service.](#20-explain-each-layer-of-a-standard-flask-app-route-model-service)
+- [21. How do `Mapped[...]` annotations and `mapped_column()` work together in SQLAlchemy 2.x style models?](#21-how-do-mapped-annotations-and-mapped-column-work-together-in-sqlalchemy-2x-style-models)
 
 ---
 
-#### 1. How does routing work in Flask?
+#### 1. What does passing __name__ to Flask() do, and why does it matter?
+
+<details>
+<summary>Reveal answer</summary>
+
+When creating the Flask app using the constructor Flask, you need to pass the current file name (arg __name__). It tells Flask which Python module the app belongs to. Flask then uses this module to find the directory on disk and uses it as the base path to find the templates and static folders.
+
+</details>
+
+---
+
+#### 2. What does app.run() do, why shouldn't you use it in production, and what do you use instead?
+
+<details>
+<summary>Reveal answer</summary>
+
+It runs the Flask app on a development server. The development server used by Flask is Werkzeug.
+
+It shouldn't be used in production because it doesn't have the security and the performance of a real server. Werkzeug is a single-threaded server which means it handles one request at a time and was built only for development purposes.
+
+For production, you use a WSGI server like Gunicorn.
+
+</details>
+
+---
+
+#### 3. How does routing work in Flask?
 
 <details>
 <summary>Reveal answer</summary>
@@ -37,7 +63,7 @@
 
 ---
 
-#### 2. How do you handle JSON data in Flask?
+#### 4. How do you handle JSON data in Flask?
 
 <details>
 <summary>Reveal answer</summary>
@@ -48,45 +74,29 @@
 
 ---
 
-#### 3. How do you structure a REST API for a document system?
+#### 5. How does Flask expose query-string parameters ?
 
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+In a Flask's route, you can access to query-string parameters using the object `request.args`. It returns a dictionary where the keys/values represent the parameters.
+
+One caveat: it returns all parameters as strings regardless of what was sent. It means that `GET /records?instrument_id=3` gives "3" and must be explicitly cast.
 
 </details>
 
 ---
 
-#### 4. What is a Flask blueprint and why use it?
+#### 6. What is the `instance/` folder for ?
 
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+The instance folder is where the application put all the files that are specific to an environment like databases, secrets, local config. All 
 
-</details>
+It's separated from the source code because those files are local and never committed. For instance, different developers might have different dev databases and you don't want them to conflict.
 
----
-
-#### 5. How do you validate data received by an API?
-
-<details>
-<summary>Reveal answer</summary>
-
-*TODO: draft answer.*
-
-</details>
-
----
-
-#### 6. How do you handle HTTP errors in a Flask API?
-
-<details>
-<summary>Reveal answer</summary>
-
-*TODO: draft answer.*
+IMPORTANT: When using a relative SQLite URI like `sqlite:///project.db`, Flask-SQLAlchemy resolves it to this instance folder.
 
 </details>
 
@@ -112,7 +122,51 @@ This tells the browser that requests from ``https://frontend.example.com`` are a
 
 ---
 
-#### 8. What's the factory pattern ? Give an example of use with Flask.
+#### 8. How do you handle HTTP errors in a Flask API?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 9. How do you validate data received by an API?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 10. What is a Flask blueprint and why use it?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 11. How do you structure a REST API for a document system?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 12. What's the factory pattern ? Give an example of use with Flask.
 
 <details>
 <summary>Reveal answer</summary>
@@ -127,48 +181,56 @@ The factory pattern solves it. It allows to control when and how the application
 
 ---
 
-#### 9. What does passing __name__ to Flask() do, and why does it matter?
+#### 13. What is the difference between `db.session.add()` and `db.session.commit()`? Why do we have this two-step process ?
 
 <details>
 <summary>Reveal answer</summary>
 
-When creating the Flask app using the constructor Flask, you need to pass the current file name (arg __name__). It tells Flask which Python module the app belongs to. Flask then uses this module to find the directory on disk and uses it as the base path to find the templates and static folders.
+`add` put an operation to the staging area - it means it'll be included in the next transaction - the commit. You can stage several operations before committing. Once you added all the operations, you call commit. This persists those operations in the database.
+
+This two-step process allows to have an atomic transaction. This mean that all the operations are considered as a single transaction - either all succeed or none. If something fails, none of the staged changes are written to the database. That way, the database is never left in a half-written state which would make it inconsistent.
 
 </details>
 
 ---
 
-#### 10. What does app.run() do, why shouldn't you use it in production, and what do you use instead?
+#### 14. How SQLAlchemy knows which tables to create in the database ?
 
 <details>
 <summary>Reveal answer</summary>
 
-It runs the Flask app on a development server. The development server used by Flask is Werkzeug.
-
-It shouldn't be used in production because it doesn't have the security and the performance of a real server. Werkzeug is a single-threaded server which means it handles one request at a time and was built only for development purposes.
-
-For production, you use a WSGI server like Gunicorn.
+SQLAlchemy creates the tables in the database when the method `db.create_all()` is executed. But how does it know which tables to create ? `db.create_all()` create a table for all the models classes that have been registered in SQLAlchemy's metadata and a model class is registered whenever it's imported. So in order to have a table created for each of your model, you just have to make sure that those models are imported before running `db.create_all()`.
 
 </details>
 
 ---
 
-#### 11. Why does Flask-SQLAlchemy use a two-step pattern (create a module-level `db`, then call `db.init_app(app)` inside the app factory) instead of tying the extension to a single global app at import time? What problems does that solve for imports and configuration?
+#### 15. How do you link the Flask application with the database ? Why in that order ?
 
 <details>
 <summary>Reveal answer</summary>
 
-Creating a model requires the `db` object so we have to be able to import it. However, if we were creating the database object and initialize it in the app factory, we wouldn't be able to import it.
+Flask stays small and generic
+The Flask class is not supposed to know about SQLAlchemy (or every other extension). If binding were app-driven, core Flask would need hooks or methods for each library. Instead, each extension implements “attach me to this app” on the extension object.
 
-So the solution is to use a two-step pattern. First, we create the object `db = SQLAlchemy()` which is an empty shell not associated to any app. Then, the method `db.init_app(app)` inside the factory binds the database with a specific app's configuration.
+The extension owns the wiring
+SQLAlchemy.init_app(app) is where the library:
 
-Apart fixing the import problems, that's what makes it possible to use different configuration : at factory call time, the database knows which configuration to use.
+reads app.config (e.g. SQLALCHEMY_*),
+registers teardowns, CLI, etc.,
+stores itself on app.extensions['sqlalchemy'] (in current versions).
+That logic lives in Flask-SQLAlchemy, so it belongs on db, not on Flask.
+
+Application factory pattern
+You often create db = SQLAlchemy() before any Flask instance exists, then in create_app() you call db.init_app(app). The db object is the long-lived “extension”; apps can be created, swapped, or tested with the same db stub.
+
+So conceptually: db is the component that knows how to integrate with Flask; app is just the target you pass in.
 
 </details>
 
 ---
 
-#### 12. What is the application context and why do we need it?
+#### 16. What is the application context and why do we need it?
 
 <details>
 <summary>Reveal answer</summary>
@@ -189,63 +251,22 @@ Also, once the context is torn down, all the database sessions are closed and th
 
 ---
 
-#### 13. How SQLAlchemy knows which tables to create in the database ?
+#### 17. Why does Flask-SQLAlchemy use a two-step pattern (create a module-level `db`, then call `db.init_app(app)` inside the app factory) instead of tying the extension to a single global app at import time? What problems does that solve for imports and configuration?
 
 <details>
 <summary>Reveal answer</summary>
 
-SQLAlchemy creates the tables in the database when the method `db.create_all()` is executed. But how does it know which tables to create ? `db.create_all()` create a table for all the models classes that have been registered in SQLAlchemy's metadata and a model class is registered whenever it's imported. So in order to have a table created for each of your model, you just have to make sure that those models are imported before running `db.create_all()`.
+Creating a model requires the `db` object so we have to be able to import it. However, if we were creating the database object and initialize it in the app factory, we wouldn't be able to import it.
+
+So the solution is to use a two-step pattern. First, we create the object `db = SQLAlchemy()` which is an empty shell not associated to any app. Then, the method `db.init_app(app)` inside the factory binds the database with a specific app's configuration.
+
+Apart fixing the import problems, that's what makes it possible to use different configuration : at factory call time, the database knows which configuration to use.
 
 </details>
 
 ---
 
-#### 14. What is the `instance/` folder for ?
-
-<details>
-<summary>Reveal answer</summary>
-
-The instance folder is where the application put all the files that are specific to an environment like databases, secrets, local config. All 
-
-It's separated from the source code because those files are local and never committed. For instance, different developers might have different dev databases and you don't want them to conflict.
-
-IMPORTANT: When using a relative SQLite URI like `sqlite:///project.db`, Flask-SQLAlchemy resolves it to this instance folder.
-
-</details>
-
----
-
-#### 15. What is the difference between `db.session.add()` and `db.session.commit()`? Why do we have this two-step process ?
-
-<details>
-<summary>Reveal answer</summary>
-
-`add` put an operation to the staging area - it means it'll be included in the next transaction - the commit. You can stage several operations before committing. Once you added all the operations, you call commit. This persists those operations in the database.
-
-This two-step process allows to have an atomic transaction. This mean that all the operations are considered as a single transaction - either all succeed or none. If something fails, none of the staged changes are written to the database. That way, the database is never left in a half-written state which would make it inconsistent.
-
-</details>
-
----
-
-#### 16. Explain each layer of a standard Flask app : route, model, service.
-
-<details>
-<summary>Reveal answer</summary>
-
-The route layer receives the input, parses it, call the service and returns the response. Its job is to receive an HTTP request and return an HTTP response.
-
-The model layer defines the data shape: columns, types, constraints and relationships. It says what the data look like.
-
-The service layer contains the business logic of the application. That's where you define what you can do with the data. It enforces rules like "a draft can move to submitted but not directly to approved".
-
-When you don't have a separate service layer, the business logic goes into the routes and get duplicated. If you have different routes required the same logic, you have to write it several times. The service layer centralizes this logic.
-
-</details>
-
----
-
-#### 17. Why can you not pass a SQLAlchemy model instance directly to `jsonify()` ?
+#### 18. Why can you not pass a SQLAlchemy model instance directly to `jsonify()` ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -266,7 +287,7 @@ The thing is, serialization is not a limitation, it's actually intentional. You 
 
 ---
 
-#### 18. What's `app.test_client()` for in Flask ?
+#### 19. What's `app.test_client()` for in Flask ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -281,20 +302,24 @@ That's the standard way to test automatically application routes and allow to av
 
 ---
 
-#### 19. How does Flask expose query-string parameters ?
+#### 20. Explain each layer of a standard Flask app : route, model, service.
 
 <details>
 <summary>Reveal answer</summary>
 
-In a Flask's route, you can access to query-string parameters using the object `request.args`. It returns a dictionary where the keys/values represent the parameters.
+The route layer receives the input, parses it, call the service and returns the response. Its job is to receive an HTTP request and return an HTTP response.
 
-One caveat: it returns all parameters as strings regardless of what was sent. It means that `GET /records?instrument_id=3` gives "3" and must be explicitly cast.
+The model layer defines the data shape: columns, types, constraints and relationships. It says what the data look like.
+
+The service layer contains the business logic of the application. That's where you define what you can do with the data. It enforces rules like "a draft can move to submitted but not directly to approved".
+
+When you don't have a separate service layer, the business logic goes into the routes and get duplicated. If you have different routes required the same logic, you have to write it several times. The service layer centralizes this logic.
 
 </details>
 
 ---
 
-#### 20. How do `Mapped[...]` annotations and `mapped_column()` work together in SQLAlchemy 2.x style models?
+#### 21. How do `Mapped[...]` annotations and `mapped_column()` work together in SQLAlchemy 2.x style models?
 
 <details>
 <summary>Reveal answer</summary>
@@ -302,31 +327,6 @@ One caveat: it returns all parameters as strings regardless of what was sent. It
 `Mapped[...]` is a Python type annotation which tells SQLAlchemy the type of the column and if it's required. It gives autocomplete and type checking in the editor.
 
 `mapped_column()` is a method to declare the database-level constraints of a field. That's what the database actually enforces.
-
-</details>
-
----
-
-#### 21. How do you link the Flask application with the database ? Why in that order ?
-
-<details>
-<summary>Reveal answer</summary>
-
-Flask stays small and generic
-The Flask class is not supposed to know about SQLAlchemy (or every other extension). If binding were app-driven, core Flask would need hooks or methods for each library. Instead, each extension implements “attach me to this app” on the extension object.
-
-The extension owns the wiring
-SQLAlchemy.init_app(app) is where the library:
-
-reads app.config (e.g. SQLALCHEMY_*),
-registers teardowns, CLI, etc.,
-stores itself on app.extensions['sqlalchemy'] (in current versions).
-That logic lives in Flask-SQLAlchemy, so it belongs on db, not on Flask.
-
-Application factory pattern
-You often create db = SQLAlchemy() before any Flask instance exists, then in create_app() you call db.init_app(app). The db object is the long-lived “extension”; apps can be created, swapped, or tested with the same db stub.
-
-So conceptually: db is the component that knows how to integrate with Flask; app is just the target you pass in.
 
 </details>
 
