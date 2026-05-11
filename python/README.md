@@ -2,15 +2,15 @@
 
 ## Table of contents
 
-- [1. What are the differences between a list, tuple, and set in Python? When would you choose one over the others?](#1-what-are-the-differences-between-a-list-tuple-and-set-in-python-when-would-you-choose-one-over-the-others)
-- [2. What is the difference between mutable and immutable types in Python? Give examples of each.](#2-what-is-the-difference-between-mutable-and-immutable-types-in-python-give-examples-of-each)
-- [3. What's the difference between `dict.get(key)` and `dict[key]`?](#3-whats-the-difference-between-dictgetkey-and-dictkey)
-- [4. What's a comprehension in Python ?](#4-whats-a-comprehension-in-python)
-- [5. What's the method `zip` for in Python ?](#5-whats-the-method-zip-for-in-python)
-- [6. What's `if __name__ == "__main__"` for ?](#6-whats-if-name-main-for)
-- [7. What's the difference between a module, a package and a library ?](#7-whats-the-difference-between-a-module-a-package-and-a-library)
-- [8. What is the standard library in Python ?](#8-what-is-the-standard-library-in-python)
-- [9. What's SQLite ?](#9-whats-sqlite)
+- [1. When is Python a strong choice for a project, and when would you choose another language instead?](#1-when-is-python-a-strong-choice-for-a-project-and-when-would-you-choose-another-language-instead)
+- [2. What are the differences between a list, tuple, and set in Python? When would you choose one over the others?](#2-what-are-the-differences-between-a-list-tuple-and-set-in-python-when-would-you-choose-one-over-the-others)
+- [3. What is the difference between mutable and immutable types in Python? Give examples of each.](#3-what-is-the-difference-between-mutable-and-immutable-types-in-python-give-examples-of-each)
+- [4. What's the difference between `dict.get(key)` and `dict[key]`?](#4-whats-the-difference-between-dictgetkey-and-dictkey)
+- [5. What's a comprehension in Python ?](#5-whats-a-comprehension-in-python)
+- [6. What's the method `zip` for in Python ?](#6-whats-the-method-zip-for-in-python)
+- [7. What's `if __name__ == "__main__"` for ?](#7-whats-if-name-main-for)
+- [8. What's the difference between a module, a package and a library ?](#8-whats-the-difference-between-a-module-a-package-and-a-library)
+- [9. What is the standard library in Python ?](#9-what-is-the-standard-library-in-python)
 - [10. What is the difference between a shallow copy and a deep copy?](#10-what-is-the-difference-between-a-shallow-copy-and-a-deep-copy)
 - [11. What's the different types of attributes in a class ?](#11-whats-the-different-types-of-attributes-in-a-class)
 - [12. What's the difference between inheritance and composition ?](#12-whats-the-difference-between-inheritance-and-composition)
@@ -20,24 +20,34 @@
 - [16. What is the difference between args and kwargs? Write a function that accepts both and prints them.](#16-what-is-the-difference-between-args-and-kwargs-write-a-function-that-accepts-both-and-prints-them)
 - [17. Explain the difference between @staticmethod and @classmethod. When would you use each?](#17-explain-the-difference-between-staticmethod-and-classmethod-when-would-you-use-each)
 - [18. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.](#18-what-is-a-python-generator-write-a-one-liner-generator-that-yields-squares-of-numbers-from-1-to-n)
-- [19. What's an ORM ? Can you name one drawback or risk of using an ORM?](#19-whats-an-orm-can-you-name-one-drawback-or-risk-of-using-an-orm)
-- [20. What is the N+1 query problem in an ORM?](#20-what-is-the-n1-query-problem-in-an-orm)
-- [21. What do black and isort do, and why do they need to be configured together?](#21-what-do-black-and-isort-do-and-why-do-they-need-to-be-configured-together)
-- [22. What's a fixture in Pytest ?](#22-whats-a-fixture-in-pytest)
-- [23. What's parametrization in Pytest ?](#23-whats-parametrization-in-pytest)
-- [24. What's the different between fixtures and parametrized test in Pytest ?](#24-whats-the-different-between-fixtures-and-parametrized-test-in-pytest)
-- [25. What's Pydantic ?](#25-whats-pydantic)
-- [26. What's a decorator in Python ?](#26-whats-a-decorator-in-python)
-- [27. When is Python a strong choice for a project, and when would you choose another language instead?](#27-when-is-python-a-strong-choice-for-a-project-and-when-would-you-choose-another-language-instead)
-- [28. How would you store and validate a JSON schema for API results in Python ?](#28-how-would-you-store-and-validate-a-json-schema-for-api-results-in-python)
-- [29. How do you write a unit test for a function that calls an external API, without actually hitting the API?](#29-how-do-you-write-a-unit-test-for-a-function-that-calls-an-external-api-without-actually-hitting-the-api)
-- [30. Explain Python's `asyncio`. How does `async/await` differ from threading?](#30-explain-pythons-asyncio-how-does-asyncawait-differ-from-threading)
-- [31. What is GIL in Python ?](#31-what-is-gil-in-python)
-- [32. How do you achieve true parallelism in Python despite the GIL ?](#32-how-do-you-achieve-true-parallelism-in-python-despite-the-gil)
-- [33. What does func(**some_dict) do in Python?](#33-what-does-funcsome-dict-do-in-python)
+- [19. What's a fixture in Pytest ?](#19-whats-a-fixture-in-pytest)
+- [20. What's parametrization in Pytest ?](#20-whats-parametrization-in-pytest)
+- [21. What's the different between fixtures and parametrized test in Pytest ?](#21-whats-the-different-between-fixtures-and-parametrized-test-in-pytest)
+- [22. What's Pydantic ?](#22-whats-pydantic)
+- [23. What's a decorator in Python ?](#23-whats-a-decorator-in-python)
+- [24. How would you store and validate a JSON schema for API results in Python ?](#24-how-would-you-store-and-validate-a-json-schema-for-api-results-in-python)
+- [25. Explain Python's `asyncio`. How does `async/await` differ from threading?](#25-explain-pythons-asyncio-how-does-asyncawait-differ-from-threading)
+- [26. What is GIL in Python ?](#26-what-is-gil-in-python)
+- [27. How do you achieve true parallelism in Python despite the GIL ?](#27-how-do-you-achieve-true-parallelism-in-python-despite-the-gil)
+- [28. What does func(**some_dict) do in Python?](#28-what-does-funcsome-dict-do-in-python)
+- [29. What is the difference between iterator and iterable?](#29-what-is-the-difference-between-iterator-and-iterable)
+- [30. What are `__repr__` and `__str__`?](#30-what-are-repr-and-str)
+- [31. What are dataclasses?](#31-what-are-dataclasses)
+- [32. What are type hints used for? Are they enforced at runtime?](#32-what-are-type-hints-used-for-are-they-enforced-at-runtime)
 
 ---
-#### 1. What are the differences between a list, tuple, and set in Python? When would you choose one over the others?
+#### 1. When is Python a strong choice for a project, and when would you choose another language instead?
+
+<details>
+<summary>Reveal answer</summary>
+
+Python is a strong choice for projects that benefit from readability, fast development, a large ecosystem, and a strong community, such as automation, APIs, data analysis, and prototyping. I would choose another language when the project has strict performance, memory, real-time, or system-level constraints.
+
+</details>
+
+---
+
+#### 2. What are the differences between a list, tuple, and set in Python? When would you choose one over the others?
 
 <details>
 <summary>Reveal answer</summary>
@@ -60,7 +70,7 @@ I would use a set when I need fast membership check or when I need to remove dup
 
 ---
 
-#### 2. What is the difference between mutable and immutable types in Python? Give examples of each.
+#### 3. What is the difference between mutable and immutable types in Python? Give examples of each.
 
 <details>
 <summary>Reveal answer</summary>
@@ -71,12 +81,12 @@ A mutable object can be changed in place after it is created, like a `list`, `di
 
 ---
 
-#### 3. What's the difference between `dict.get(key)` and `dict[key]`?
+#### 4. What's the difference between `dict.get(key)` and `dict[key]`?
 
 <details>
 <summary>Reveal answer</summary>
 
-Both are ways to retrieve the value associated to a key in a dictionnary.
+Both are ways to retrieve the value associated to a key in a dictionary.
 
 The difference is how they handle missing keys.
 
@@ -94,7 +104,7 @@ On the other hand, `dict[key]` raises a KeyError if the key is missing.
 
 ---
 
-#### 4. What's a comprehension in Python ?
+#### 5. What's a comprehension in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -128,7 +138,7 @@ There is a comprehension for almost each type of collection: list, set, dict.
 
 ---
 
-#### 5. What's the method `zip` for in Python ?
+#### 6. What's the method `zip` for in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -148,7 +158,7 @@ for name, score in zip(names, scores):
 // Charlie 88
 ```
 
-A cool usecase for zip is when you need to create a dictionnary out of several lists.
+A cool usecase for zip is when you need to create a dictionary out of several lists.
 
 ```python
 names = ["Alice", "Bob", "Charlie", "Delta"]
@@ -161,7 +171,7 @@ new_dict = dict(zip(names, scores))
 
 ---
 
-#### 6. What's `if __name__ == "__main__"` for ?
+#### 7. What's `if __name__ == "__main__"` for ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -176,7 +186,7 @@ This is important because we don't want an imported module to execute code right
 
 ---
 
-#### 7. What's the difference between a module, a package and a library ?
+#### 8. What's the difference between a module, a package and a library ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -193,7 +203,7 @@ A library is a collection of reusable code designed to solve related problems. A
 
 ---
 
-#### 8. What is the standard library in Python ?
+#### 9. What is the standard library in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -211,21 +221,6 @@ Some examples of those standard libraries:
 - `math` to get advanced math functions
 
 Many believe that the success of Python is partly due to this philosophy. Developers can solve many everyday problems using reliable, built-in modules instead of reimplementing common functionality or immediately depending on external libraries.
-
-</details>
-
----
-
-#### 9. What's SQLite ?
-
-<details>
-<summary>Reveal answer</summary>
-
-SQLite is a file-based relational database. It's convenient because unlike traditional database like MySQL, you don't need a separate server process nor installation.
-
-That makes it the best choice if you need a fast way to persist data for local development.
-
-However it lacks features needed in production like concurrent writing. That's why it's not recommended in production and is then replaced by a system like PostgreSQL.
 
 </details>
 
@@ -417,7 +412,7 @@ In Python, keywords arguments can only be placed after positional arguments.
 
 Ok so what about *args and **kwargs ? Both are ways to retrieve additional parameters given to a function.
 
-The difference is that args collects additional positional parameters in a tuple whereas kwargs collects additional keyword parameters in a dictionnary.
+The difference is that args collects additional positional parameters in a tuple whereas kwargs collects additional keyword parameters in a dictionary.
 
 The names args and kwargs are conventions. What really matters are the symbols * and **.
 
@@ -532,56 +527,7 @@ This structure has one trade-off though which is that you can only iterate over 
 
 ---
 
-#### 19. What's an ORM ? Can you name one drawback or risk of using an ORM?
-
-<details>
-<summary>Reveal answer</summary>
-
-An Object Relational Mapper, or ORM, is an abstraction used in software development to let application code interact with a relational database using entities instead of raw SQL. The idea is to represent database concepts with OOP: tables become classes, columns become attributes, and rows become instances.
-
-The main advantage of an ORM is that it's natural to manipulate classes and instances in a code, whereas manipulating raw SQL is error-prone and requires to know about specific SQL syntax.
-
-With an ORM, the actual SQL requests are built under the hood. They're also optimized for security. For instance, ORMs have in-built SQL injection protections that a code using raw SQL might lack.
-
-The main drawback is that it hides the generated SQL. The SQL may be inefficient (N+1 queries problem), and this extra abstraction layer can make performance problems or debugging harder.s
-
-</details>
-
----
-
-#### 20. What is the N+1 query problem in an ORM?
-
-<details>
-<summary>Reveal answer</summary>
-
-The N+1 query problem is often used to describe performance issues with ORM. It happens when the ORM performs one query to get a list of elements, then performs an additional query per element, hence resulting in N+1 queries.
-
-For example, if you have a table Car and a table Wheel with a one-to-many relationship between the two tables then an ORM might do SELECT * FROM Car and then SELECT * FROM Wheel where [car.id](http://car.id/) = x.
-
-Doing that many small queries is inefficient. It's often more efficient to do one complex query. That's because each round trips to the database is expensive.
-
-Which means that you could get the same data in a much more efficient way if you were doing a more complex query such as a join.
-
-</details>
-
----
-
-#### 21. What do black and isort do, and why do they need to be configured together?
-
-<details>
-<summary>Reveal answer</summary>
-
-`black` is a code formatter which rewrite Python files to enforce a consistent style. `isort` is a tool which reorder the imports of each file.
-
-The purpose of those tools is to delete any discussions on the formatting. They ensure every file looks the same, regardless of who wrote it.
-
-They should be configured together because they can conflict. Especially, `black` has some opinions on how imports should look. `isort` has others opinions. Without coordination between the two tools, they would reformat the same lines differently. To solve this, `isort` should be configured with `profile = "black"`.
-
-</details>
-
----
-
-#### 22. What's a fixture in Pytest ?
+#### 19. What's a fixture in Pytest ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -598,7 +544,7 @@ When you declare a fixture, you basically say "here's how to create the resource
 
 ---
 
-#### 23. What's parametrization in Pytest ?
+#### 20. What's parametrization in Pytest ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -613,7 +559,7 @@ In Pytest, you use a decoration called `@pytest.mark.parametrize`.
 
 ---
 
-#### 24. What's the different between fixtures and parametrized test in Pytest ?
+#### 21. What's the different between fixtures and parametrized test in Pytest ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -636,7 +582,7 @@ It's important because it explains why a parametrized decoractor accepts only pl
 
 ---
 
-#### 25. What's Pydantic ?
+#### 22. What's Pydantic ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -653,7 +599,7 @@ Those two are separated because they can evolve independently - you might want t
 
 ---
 
-#### 26. What's a decorator in Python ?
+#### 23. What's a decorator in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -664,18 +610,7 @@ A decorator is a function that takes another function as input and returns a new
 
 ---
 
-#### 27. When is Python a strong choice for a project, and when would you choose another language instead?
-
-<details>
-<summary>Reveal answer</summary>
-
-Python is a strong choice for projects that benefit from readability, fast development, a large ecosystem, and a strong community, such as automation, APIs, data analysis, and prototyping. I would choose another language when the project has strict performance, memory, real-time, or system-level constraints.
-
-</details>
-
----
-
-#### 28. How would you store and validate a JSON schema for API results in Python ?
+#### 24. How would you store and validate a JSON schema for API results in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -686,18 +621,7 @@ I would define a JSON schema to describe the expected result and validate incomi
 
 ---
 
-#### 29. How do you write a unit test for a function that calls an external API, without actually hitting the API?
-
-<details>
-<summary>Reveal answer</summary>
-
-I would mock the API request so it returns a predefined response. That way, the function can be tested in isolation without hitting the real API. This can be done using the library `pytest` for instance.
-
-</details>
-
----
-
-#### 30. Explain Python's `asyncio`. How does `async/await` differ from threading?
+#### 25. Explain Python's `asyncio`. How does `async/await` differ from threading?
 
 <details>
 <summary>Reveal answer</summary>
@@ -770,7 +694,7 @@ When to use multi-threading over asyncio ? For blocking code. For instance, the 
 
 ---
 
-#### 31. What is GIL in Python ?
+#### 26. What is GIL in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -789,7 +713,7 @@ Others implementations of Python like Jython don't have this limitation but come
 
 ---
 
-#### 32. How do you achieve true parallelism in Python despite the GIL ?
+#### 27. How do you achieve true parallelism in Python despite the GIL ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -800,14 +724,87 @@ If you use CPython, you can obtain true parallelism onmy if you use separate CPy
 
 ---
 
-#### 33. What does func(**some_dict) do in Python?
+#### 28. What does `**some_dict` do in Python?
 
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+The syntax `**some_dict` unpacks a dictionary by keys.
+
+There are two main use cases for this syntax.
+
+First, to pass the key/value pairs of a dict as keyword arguments - `func(**some_dict)`. In that situation, the dictionary keys must match the parameter names. 
+
+```python
+func(**{"name": "Alice", "age": 30})
+# same as:
+func(name="Alice", age=30)
+```
+
+Second, to unpack a dictionary into another dictionary.
+
+```python
+data = {"name": "Alice", **{"age": 30}}
+# {"name": "Alice", "age": 30}
+```
+</details>
+
+
+---
+
+#### 29. What is the difference between iterator and iterable?
+
+<details>
+<summary>Reveal answer</summary>
+
+An iterator is an object that has a `__next__` method. It's the concept used to go through each value of a collection. You can see an iterator as a cursor that walks through the values one by one.
+
+An iterable is an object that has a `__iter__` method. It's basically a source of data you can ask to start giving you values.
+
+For example, a list is an iterable but not an iterator. 
+
+In most everyday code, you don't manipulate iterators directly; Python does it under the hood. When you call `for x in iterable`, what's actually happening is that Python gets the iterator from the iterable and uses it to give you the values.
 
 </details>
 
+---
+
+#### 30. What are `__repr__` and `__str__`?
+
+<details>
+<summary>Reveal answer</summary>
+
+`__str__` and `__repr__` are special methods used to represent an object as a string. `__str__` is meant to be human-friendly, for display to users. `__repr__` is meant to be more precise and developer-friendly, useful for debugging. Ideally, `repr(obj)` returns something that could recreate the object, but when that is not practical it should at least be unambiguous.
+
+</details>
+
+---
+
+#### 31. What are dataclasses?
+
+<details>
+<summary>Reveal answer</summary>
+
+Dataclasses are Python classes with the decorator `@dataclass`. This decorator tells Python to automatically generate methods like `__init__`, `__repr__`, and `__eq__` based on the fields of the class. It's a way to reduce boilerplate code on simple classes. This decorator was designed for classes where the important part is their fields (and not really their methods) - thus the name data classes.
+
+```python
+@dataclass
+class Point:
+    x: int
+    y: int
+```
+
+</details>
+
+---
+
+#### 32. What are type hints used for? Are they enforced at runtime?
+
+<details>
+<summary>Reveal answer</summary>
+
+Type hints are used to annotate python code with expected types. They're not enforced at runtime by Python which means they won't raise an error if a type is incorrect during the execution. However, type checkers and IDEs can use them to catch mistakes earlier. They also improve readibility, maintainability and allow auto-completion during development.
+
+</details>
 
 ---

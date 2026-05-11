@@ -57,7 +57,7 @@ For production, you use a WSGI server like Gunicorn.
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+In Flask, routing is how you connect a URL path to a Python function. It's done through the decorator `@app.route(url, methods=...)`. When a request comes in, Flask matches it against its registered routes and call the corresponding view function.
 
 </details>
 
@@ -68,7 +68,7 @@ For production, you use a WSGI server like Gunicorn.
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+Inside the view functions, Flask automatically provides the request context and the app context. It means that to access the request body, you use the object `request` from Flask. This object comes with the method `get_json()` which allows to retrieve the JSON data as a Python dictionary. What you usually do then, is to validate the data using an expected schema and a library like pydantic. Then, you process the data and returns a json response using `jsonify()`.
 
 </details>
 
@@ -127,7 +127,7 @@ This tells the browser that requests from ``https://frontend.example.com`` are a
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+In a Flask API, you can handle HTTP errors by registering a global error handler with the decorator `@app.errorhandler(HTTPException)`. It allows you to map all HTTPException errors bubbling up from the application to a dedicated Python function. Then, for an HTTP error, you generally want to preserve the HTTP status code, log useful information for debugging and return a consistence error response in the body.
 
 </details>
 
@@ -138,7 +138,7 @@ This tells the browser that requests from ``https://frontend.example.com`` are a
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+You validate data received by an API against a predefined schema which defines the expected fields, types and constraints. You can use a library such as Pydantic. It will parse the input, validate it, apply some conversions or defaults values when possible and returns an error otherwise. 
 
 </details>
 
@@ -149,24 +149,15 @@ This tells the browser that requests from ``https://frontend.example.com`` are a
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+A Flask blueprint is a way to group related routes and logic into a separate module. The idea is to split your api into several smaller parts, each with a specific purpose. These blueprints are then registered into the main API with a URL prefix and Flask includes their routes in the application routing table. 
+
+You use blueprints to split an API by feature or domain. It makes the code more and maintainable, clearly delimitate the different parts of your API and keep files small instead of having one giant file with all the routes.
 
 </details>
 
 ---
 
-#### 11. How do you structure a REST API for a document system?
-
-<details>
-<summary>Reveal answer</summary>
-
-*TODO: draft answer.*
-
-</details>
-
----
-
-#### 12. What's the factory pattern ? Give an example of use with Flask.
+#### 11. What's the factory pattern ? Give an example of use with Flask.
 
 <details>
 <summary>Reveal answer</summary>
@@ -181,7 +172,7 @@ The factory pattern solves it. It allows to control when and how the application
 
 ---
 
-#### 13. What is the difference between `db.session.add()` and `db.session.commit()`? Why do we have this two-step process ?
+#### 12. What is the difference between `db.session.add()` and `db.session.commit()`? Why do we have this two-step process ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -194,7 +185,7 @@ This two-step process allows to have an atomic transaction. This mean that all t
 
 ---
 
-#### 14. How SQLAlchemy knows which tables to create in the database ?
+#### 13. How SQLAlchemy knows which tables to create in the database ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -205,7 +196,7 @@ SQLAlchemy creates the tables in the database when the method `db.create_all()` 
 
 ---
 
-#### 15. How do you link the Flask application with the database ? Why in that order ?
+#### 14. How do you link the Flask application with the database ? Why in that order ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -230,7 +221,7 @@ So conceptually: db is the component that knows how to integrate with Flask; app
 
 ---
 
-#### 16. What is the application context and why do we need it?
+#### 15. What is the application context and why do we need it?
 
 <details>
 <summary>Reveal answer</summary>
@@ -251,7 +242,7 @@ Also, once the context is torn down, all the database sessions are closed and th
 
 ---
 
-#### 17. Why does Flask-SQLAlchemy use a two-step pattern (create a module-level `db`, then call `db.init_app(app)` inside the app factory) instead of tying the extension to a single global app at import time? What problems does that solve for imports and configuration?
+#### 16. Why does Flask-SQLAlchemy use a two-step pattern (create a module-level `db`, then call `db.init_app(app)` inside the app factory) instead of tying the extension to a single global app at import time? What problems does that solve for imports and configuration?
 
 <details>
 <summary>Reveal answer</summary>
@@ -266,7 +257,7 @@ Apart fixing the import problems, that's what makes it possible to use different
 
 ---
 
-#### 18. Why can you not pass a SQLAlchemy model instance directly to `jsonify()` ?
+#### 17. Why can you not pass a SQLAlchemy model instance directly to `jsonify()` ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -287,7 +278,7 @@ The thing is, serialization is not a limitation, it's actually intentional. You 
 
 ---
 
-#### 19. What's `app.test_client()` for in Flask ?
+#### 18. What's `app.test_client()` for in Flask ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -302,7 +293,7 @@ That's the standard way to test automatically application routes and allow to av
 
 ---
 
-#### 20. Explain each layer of a standard Flask app : route, model, service.
+#### 19. Explain each layer of a standard Flask app : route, model, service.
 
 <details>
 <summary>Reveal answer</summary>
@@ -319,7 +310,7 @@ When you don't have a separate service layer, the business logic goes into the r
 
 ---
 
-#### 21. How do `Mapped[...]` annotations and `mapped_column()` work together in SQLAlchemy 2.x style models?
+#### 20. How do `Mapped[...]` annotations and `mapped_column()` work together in SQLAlchemy 2.x style models?
 
 <details>
 <summary>Reveal answer</summary>
