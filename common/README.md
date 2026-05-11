@@ -18,6 +18,16 @@
 - [14. How do you migrate millions of records safely?](#14-how-do-you-migrate-millions-of-records-safely)
 - [15. How do you handle a large data migration?](#15-how-do-you-handle-a-large-data-migration)
 - [16. In a unit test for a service that calls an external payment API, what would you mock and why?](#16-in-a-unit-test-for-a-service-that-calls-an-external-payment-api-what-would-you-mock-and-why)
+- [17. What makes an API RESTful?](#17-what-makes-an-api-restful)
+- [18. Difference between PUT, PATCH, and POST?](#18-difference-between-put-patch-and-post)
+- [19. Session-based auth vs token-based auth?](#19-session-based-auth-vs-token-based-auth)
+- [20. Access token vs refresh token?](#20-access-token-vs-refresh-token)
+- [21. How do you store passwords securely?](#21-how-do-you-store-passwords-securely)
+- [22. How do you avoid leaking sensitive data in logs/errors?](#22-how-do-you-avoid-leaking-sensitive-data-in-logserrors)
+- [23. What happens when you type a URL in the browser and press enter?](#23-what-happens-when-you-type-a-url-in-the-browser-and-press-enter)
+- [24. What is the HTTP request/response lifecycle?](#24-what-is-the-http-requestresponse-lifecycle)
+- [25. What is the difference between authentication and authorization?](#25-what-is-the-difference-between-authentication-and-authorization)
+- [26. How do you write a unit test for a function that calls an external API, without actually hitting the API?](#26-how-do-you-write-a-unit-test-for-a-function-that-calls-an-external-api-without-actually-hitting-the-api)
 
 ---
 
@@ -223,5 +233,115 @@ I would start by checking the stack trace and production logs around the failure
 <summary>Reveal answer</summary>
 
 I would mock the external payment client or HTTP request and make it return a realistic fake response. The goal is to test my service logic without depending on the real payment API, network, credentials, or provider availability. Besides the return value, I would verify that the payment client was called with the correct parameters, and I would test how the service behaves when the payment API returns an error or times out.
+
+</details>
+
+---
+
+#### 17. What makes an API RESTful?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 18. Difference between PUT, PATCH, and POST?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 19. Session-based auth vs token-based auth?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 20. Access token vs refresh token?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 21. How do you store passwords securely?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 22. How do you avoid leaking sensitive data in logs/errors?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 23. What happens when you type a URL in the browser and press enter?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 24. What is the HTTP request/response lifecycle?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 25. What is the difference between authentication and authorization?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 26. How do you write a unit test for a function that calls an external API, without actually hitting the API?
+
+<details>
+<summary>Reveal answer</summary>
+
+I would mock the API request so it returns a predefined response. That way, the function can be tested in isolation without hitting the real API. This can be done using the library `pytest` for instance.
 
 </details>
