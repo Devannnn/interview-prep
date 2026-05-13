@@ -30,7 +30,11 @@
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+Git is a distributed version control system (VCS) that runs locally and tracks history and branches.
+
+Microsoft's GitHub is a platform to host your Git repositories. It's built on top of Git and adds collaboration features such as pull requests, code review, and issues. 
+
+There are similar platforms to GitHub also using Git - such as GitLab and Bitbucket. They also host Git repos and add their own workflows.
 
 </details>
 
@@ -41,7 +45,7 @@
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+A commit is a snapshot of changes made to a repository at a specific point in time. It bundles the changes staged locally and associates them with a message and a hash. A commit also points to its parent commit, creating the commit history - which is the evolution of the repo over time. It shows what the repo looks like after your staged changes.
 
 </details>
 
@@ -52,7 +56,7 @@
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+A branch is an independent sequence of commits. You use it to isolate work - for instance, you would create a new branch to develop a new feature. It allows you to change the code without impacting the original branch - until the feature is ready to be merged into the main branch. At low level, a branch is merely a pointer to a commit, that advances with each new commit.
 
 </details>
 
