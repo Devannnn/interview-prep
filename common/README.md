@@ -6,24 +6,16 @@
 - [2. What is the HTTP request/response lifecycle?](#2-what-is-the-http-requestresponse-lifecycle)
 - [3. What happens when you type a URL in the browser and press enter?](#3-what-happens-when-you-type-a-url-in-the-browser-and-press-enter)
 - [4. What is the difference between 400, 401, 403, and 404?](#4-what-is-the-difference-between-400-401-403-and-404)
-- [5. What is the difference between authentication and authorization?](#5-what-is-the-difference-between-authentication-and-authorization)
-- [6. What is the difference between localStorage, sessionStorage, and cookies?](#6-what-is-the-difference-between-localstorage-sessionstorage-and-cookies)
-- [7. What are CPU-bound and I/O-bound tasks ?](#7-what-are-cpu-bound-and-io-bound-tasks)
-- [8. What makes an API RESTful?](#8-what-makes-an-api-restful)
-- [9. Difference between PUT, PATCH, and POST?](#9-difference-between-put-patch-and-post)
-- [10. Why is it usually a bad idea for a GET endpoint to modify data?](#10-why-is-it-usually-a-bad-idea-for-a-get-endpoint-to-modify-data)
-- [11. What is CORS and how would you configure it correctly for a Python backend serving a frontend on a different domain?](#11-what-is-cors-and-how-would-you-configure-it-correctly-for-a-python-backend-serving-a-frontend-on-a-different-domain)
-- [12. Session-based auth vs token-based auth?](#12-session-based-auth-vs-token-based-auth)
-- [13. Access token vs refresh token?](#13-access-token-vs-refresh-token)
-- [14. How do you store passwords securely?](#14-how-do-you-store-passwords-securely)
-- [15. How do you avoid leaking sensitive data in logs/errors?](#15-how-do-you-avoid-leaking-sensitive-data-in-logserrors)
-- [16. How would you write tests for an API?](#16-how-would-you-write-tests-for-an-api)
-- [17. How do you write a unit test for a function that calls an external API, without actually hitting the API?](#17-how-do-you-write-a-unit-test-for-a-function-that-calls-an-external-api-without-actually-hitting-the-api)
-- [18. In a unit test for a service that calls an external payment API, what would you mock and why?](#18-in-a-unit-test-for-a-service-that-calls-an-external-payment-api-what-would-you-mock-and-why)
-- [19. What is the difference between a VM and a container?](#19-what-is-the-difference-between-a-vm-and-a-container)
-- [20. Imagine your code works locally, but fails in production. What are some possible reasons, and how would you investigate?](#20-imagine-your-code-works-locally-but-fails-in-production-what-are-some-possible-reasons-and-how-would-you-investigate)
-- [21. A bug only happens sometimes in production and you cannot reproduce it locally. What steps would you take to investigate? What extra logging or monitoring would help you without exposing sensitive data?](#21-a-bug-only-happens-sometimes-in-production-and-you-cannot-reproduce-it-locally-what-steps-would-you-take-to-investigate-what-extra-logging-or-monitoring-would-help-you-without-exposing-sensitive-data)
-- [22. How do you handle a large data migration?](#22-how-do-you-handle-a-large-data-migration)
+- [5. What is the difference between localStorage, sessionStorage, and cookies?](#5-what-is-the-difference-between-localstorage-sessionstorage-and-cookies)
+- [6. What are CPU-bound and I/O-bound tasks ?](#6-what-are-cpu-bound-and-io-bound-tasks)
+- [7. What makes an API RESTful?](#7-what-makes-an-api-restful)
+- [8. Difference between PUT, PATCH, and POST?](#8-difference-between-put-patch-and-post)
+- [9. How would you write tests for an API?](#9-how-would-you-write-tests-for-an-api)
+- [10. How do you write a unit test for a function that calls an external API, without actually hitting the API?](#10-how-do-you-write-a-unit-test-for-a-function-that-calls-an-external-api-without-actually-hitting-the-api)
+- [11. In a unit test for a service that calls an external payment API, what would you mock and why?](#11-in-a-unit-test-for-a-service-that-calls-an-external-payment-api-what-would-you-mock-and-why)
+- [12. What is the difference between a VM and a container?](#12-what-is-the-difference-between-a-vm-and-a-container)
+- [13. Imagine your code works locally, but fails in production. What are some possible reasons, and how would you investigate?](#13-imagine-your-code-works-locally-but-fails-in-production-what-are-some-possible-reasons-and-how-would-you-investigate)
+- [14. A bug only happens sometimes in production and you cannot reproduce it locally. What steps would you take to investigate? What extra logging or monitoring would help you without exposing sensitive data?](#14-a-bug-only-happens-sometimes-in-production-and-you-cannot-reproduce-it-locally-what-steps-would-you-take-to-investigate-what-extra-logging-or-monitoring-would-help-you-without-exposing-sensitive-data)
 
 ---
 
@@ -74,18 +66,7 @@
 
 ---
 
-#### 5. What is the difference between authentication and authorization?
-
-<details>
-<summary>Reveal answer</summary>
-
-*TODO: draft answer.*
-
-</details>
-
----
-
-#### 6. What is the difference between localStorage, sessionStorage, and cookies?
+#### 5. What is the difference between localStorage, sessionStorage, and cookies?
 
 <details>
 <summary>Reveal answer</summary>
@@ -102,7 +83,7 @@ Cookies are very tiny data - 4 Kb - stored in the browser and which are sent to 
 
 ---
 
-#### 7. What are CPU-bound and I/O-bound tasks ?
+#### 6. What are CPU-bound and I/O-bound tasks ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -117,7 +98,7 @@ An I/O-bound task means that this task spends most its time waiting for external
 
 ---
 
-#### 8. What makes an API RESTful?
+#### 7. What makes an API RESTful?
 
 <details>
 <summary>Reveal answer</summary>
@@ -128,7 +109,7 @@ An I/O-bound task means that this task spends most its time waiting for external
 
 ---
 
-#### 9. Difference between PUT, PATCH, and POST?
+#### 8. Difference between PUT, PATCH, and POST?
 
 <details>
 <summary>Reveal answer</summary>
@@ -139,45 +120,7 @@ An I/O-bound task means that this task spends most its time waiting for external
 
 ---
 
-#### 10. Why is it usually a bad idea for a GET endpoint to modify data?
-
-<details>
-<summary>Reveal answer</summary>
-
-`GET` should be **safe** and **idempotent**. "Safe" means it should not modify server state. "Idempotent" means repeating the same request should have the same effect. A mutating `GET` is risky because browsers, crawlers, caches, link previews, or proxies may call `GET` requests automatically. Also it exposes the application to **CSRF** attacks.
-
-</details>
-
----
-
-#### 11. What is CORS and how would you configure it correctly for a Python backend serving a frontend on a different domain?
-
-<details>
-<summary>Reveal answer</summary>
-
-To understand CORS, you first need to understand same-origin policy (SOP).
-
-SOP is a security mechanism on the browser. The principle is simple : let's say you got unlucky and opened a malicious website whose domain is `http://evil.com`. This website ran a malicious script into your browser. Bad news, it already has access to your local storage, session storage and cookies... BUT those are only data related to the page it opened. What the attacker would like is to get access to any site in your browser (bank, social networks, email, etc). For this, it sends a request to those sites - e.g `bank.com` - and reads the response. 
-
-That's where SOP plays its role. SOP prevents script running in one origin (protocol + domain + port) from reading data from another origin. 
-
-Here, it means that the browser doesn't allow the malicious script running at `http://evil.com` from reading data coming from `http://bank.com`. SOP doesn't prevent from sending the request, but it prevents the frontend from reading the response.
-
-Without SOP, an attacker could read any site in your browser after you opened just one malicious tab. This would be catastrophic.
-
-SOP is useful but it becomes a problem when you are developing a frontend and a backend with different domains. For instance, `https://frontend.example.com` and `https://api.example.com`. Here, the browser won't allow your frontend to see the data sent by your backend.
-
-The solution is to configure the mechanism that manages the interactions between different domains : cross-origin resource sharing or CORS.
-
-It's a security mechanism implemented by browsers to control which domains can access resources from a different origin. By default, it applies the same-origin policy.
-
-The solution is to configure CORS in the backend to define which origins are allowed to fetch resources.
-
-</details>
-
----
-
-#### 12. Session-based auth vs token-based auth?
+#### 9. How would you write tests for an API?
 
 <details>
 <summary>Reveal answer</summary>
@@ -188,51 +131,7 @@ The solution is to configure CORS in the backend to define which origins are all
 
 ---
 
-#### 13. Access token vs refresh token?
-
-<details>
-<summary>Reveal answer</summary>
-
-*TODO: draft answer.*
-
-</details>
-
----
-
-#### 14. How do you store passwords securely?
-
-<details>
-<summary>Reveal answer</summary>
-
-*TODO: draft answer.*
-
-</details>
-
----
-
-#### 15. How do you avoid leaking sensitive data in logs/errors?
-
-<details>
-<summary>Reveal answer</summary>
-
-*TODO: draft answer.*
-
-</details>
-
----
-
-#### 16. How would you write tests for an API?
-
-<details>
-<summary>Reveal answer</summary>
-
-*TODO: draft answer.*
-
-</details>
-
----
-
-#### 17. How do you write a unit test for a function that calls an external API, without actually hitting the API?
+#### 10. How do you write a unit test for a function that calls an external API, without actually hitting the API?
 
 <details>
 <summary>Reveal answer</summary>
@@ -243,7 +142,7 @@ I would mock the API request so it returns a predefined response. That way, the 
 
 ---
 
-#### 18. In a unit test for a service that calls an external payment API, what would you mock and why?
+#### 11. In a unit test for a service that calls an external payment API, what would you mock and why?
 
 <details>
 <summary>Reveal answer</summary>
@@ -254,7 +153,7 @@ I would mock the external payment client or HTTP request and make it return a re
 
 ---
 
-#### 19. What is the difference between a VM and a container?
+#### 12. What is the difference between a VM and a container?
 
 <details>
 <summary>Reveal answer</summary>
@@ -265,7 +164,7 @@ I would mock the external payment client or HTTP request and make it return a re
 
 ---
 
-#### 20. Imagine your code works locally, but fails in production. What are some possible reasons, and how would you investigate?
+#### 13. Imagine your code works locally, but fails in production. What are some possible reasons, and how would you investigate?
 
 <details>
 <summary>Reveal answer</summary>
@@ -278,22 +177,11 @@ I would first check the production error message, logs, and stack trace to under
 
 ---
 
-#### 21. A bug only happens sometimes in production and you cannot reproduce it locally. What steps would you take to investigate? What extra logging or monitoring would help you without exposing sensitive data?
+#### 14. A bug only happens sometimes in production and you cannot reproduce it locally. What steps would you take to investigate? What extra logging or monitoring would help you without exposing sensitive data?
 
 <details>
 <summary>Reveal answer</summary>
 
 I would start by checking the stack trace and production logs around the failure. Then I would look for patterns: affected users, request payloads, timestamps, specific servers, database records, feature flags, or load spikes. If logs are not enough, I would add targeted logging with correlation/request IDs, but avoid logging secrets or personal data. I would also compare local and production configuration, dependency versions, database schema, environment variables, and external service behavior.
-
-</details>
-
----
-
-#### 22. How do you handle a large data migration?
-
-<details>
-<summary>Reveal answer</summary>
-
-*TODO: draft answer.*
 
 </details>

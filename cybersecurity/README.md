@@ -9,7 +9,12 @@
 - [5. What's a CSRF ? Why would storing a JWT in an httpOnly cookie make it immune to XSS but exposed to CSRF?](#5-whats-a-csrf-why-would-storing-a-jwt-in-an-httponly-cookie-make-it-immune-to-xss-but-exposed-to-csrf)
 - [6. Where can you store a JWT on the frontend? What are the security trade-offs of each?](#6-where-can-you-store-a-jwt-on-the-frontend-what-are-the-security-trade-offs-of-each)
 - [7. How do you protect against CSRF when your JWT is in an httpOnly cookie?](#7-how-do-you-protect-against-csrf-when-your-jwt-is-in-an-httponly-cookie)
-- [8. What’s CORS ?](#8-whats-cors)
+- [8. What is CORS and how would you configure it correctly for a backend serving a frontend on a different domain?](#8-what-is-cors-and-how-would-you-configure-it-correctly-for-a-backend-serving-a-frontend-on-a-different-domain)
+- [9. Why is it usually a bad idea for a GET endpoint to modify data?](#9-why-is-it-usually-a-bad-idea-for-a-get-endpoint-to-modify-data)
+- [10. Session-based auth vs token-based auth?](#10-session-based-auth-vs-token-based-auth)
+- [11. Access token vs refresh token?](#11-access-token-vs-refresh-token)
+- [12. How do you store passwords securely?](#12-how-do-you-store-passwords-securely)
+- [13. How do you avoid leaking sensitive data in logs/errors?](#13-how-do-you-avoid-leaking-sensitive-data-in-logserrors)
 
 ---
 
@@ -167,10 +172,82 @@ For several reasons:
 
 ---
 
-#### 8. What’s CORS ?
+#### 8. What is CORS and how would you configure it correctly for a backend serving a frontend on a different domain?
 
 <details>
 <summary>Reveal answer</summary>
 
-CORS, or Cross-Origin Resource Sharing, is a browser security mechanism that controls whether JavaScript from one origin is allowed to access resources from another origin. It mainly protects response access in the browser.
+To understand CORS, you first need to understand same-origin policy (SOP).
+
+SOP is a security mechanism on the browser. The principle is simple : let's say you got unlucky and opened a malicious website whose domain is `http://evil.com`. This website ran a malicious script into your browser. Bad news, it already has access to your local storage, session storage and cookies... BUT those are only data related to the page it opened. What the attacker would like is to get access to any site in your browser (bank, social networks, email, etc). For this, it sends a request to those sites - e.g `bank.com` - and reads the response. 
+
+That's where SOP plays its role. SOP prevents script running in one origin (protocol + domain + port) from reading data from another origin. 
+
+Here, it means that the browser doesn't allow the malicious script running at `http://evil.com` from reading data coming from `http://bank.com`. SOP doesn't prevent from sending the request, but it prevents the frontend from reading the response.
+
+Without SOP, an attacker could read any site in your browser after you opened just one malicious tab. This would be catastrophic.
+
+SOP is useful but it becomes a problem when you are developing a frontend and a backend with different domains. For instance, `https://frontend.example.com` and `https://api.example.com`. Here, the browser won't allow your frontend to see the data sent by your backend.
+
+The solution is to configure the mechanism that manages the interactions between different domains : cross-origin resource sharing or CORS.
+
+It's a security mechanism implemented by browsers to control which domains can access resources from a different origin. By default, it applies the same-origin policy.
+
+The solution is to configure CORS in the backend to define which origins are allowed to fetch resources.
+
+</details>
+
+---
+
+#### 9. Why is it usually a bad idea for a GET endpoint to modify data?
+
+<details>
+<summary>Reveal answer</summary>
+
+`GET` should be **safe** and **idempotent**. "Safe" means it should not modify server state. "Idempotent" means repeating the same request should have the same effect. A mutating `GET` is risky because browsers, crawlers, caches, link previews, or proxies may call `GET` requests automatically. Also it exposes the application to **CSRF** attacks.
+
+</details>
+
+---
+
+#### 10. Session-based auth vs token-based auth?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 11. Access token vs refresh token?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 12. How do you store passwords securely?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
+</details>
+
+---
+
+#### 13. How do you avoid leaking sensitive data in logs/errors?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
+
 </details>

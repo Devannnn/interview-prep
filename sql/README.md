@@ -20,6 +20,7 @@
 - [16. What's SQLite ?](#16-whats-sqlite)
 - [17. What's an ORM ? Can you name one drawback or risk of using an ORM?](#17-whats-an-orm-can-you-name-one-drawback-or-risk-of-using-an-orm)
 - [18. What is the N+1 query problem in an ORM?](#18-what-is-the-n1-query-problem-in-an-orm)
+- [19. How do you handle a large data migration?](#19-how-do-you-handle-a-large-data-migration)
 
 ---
 
@@ -254,6 +255,17 @@ For example, if you have a table Car and a table Wheel with a one-to-many relati
 Doing that many small queries is inefficient. It's often more efficient to do one complex query. That's because each round trips to the database is expensive.
 
 Which means that you could get the same data in a much more efficient way if you were doing a more complex query such as a join.
+
+</details>
+
+---
+
+#### 19. How do you handle a large data migration?
+
+<details>
+<summary>Reveal answer</summary>
+
+*TODO: draft answer.*
 
 </details>
 
