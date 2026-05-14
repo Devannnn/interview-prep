@@ -215,7 +215,33 @@ The solution is to configure CORS in the backend to define which origins are all
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+Both are systems for a user to authenticate to a server.
+
+In a session-based auth, the server stores the authentication state. Users authenticate once using their credentials, the server verifies those credentials, creates a session on its side (stored in memory, database or Redis) and sends a session ID back to the user. When the user uses this session ID in subsequent requests, the server will check its list of current sessions and match the session ID to retrieve the session data.
+
+In token-based auth, the client stores a token that carries signed authentication claims. Users authenticate once using their credentials, the server verifies those credentials and sends a JWT back to the client. The client can then send this token with subsequent requests, and the server verifies it to authenticate the user.
+
+The difference between those two systems is: what does the data sent by the user to authenticate means ? In a session-based auth, the data is a session ID. For the user, it means nothing. It's just an opaque ID like `abc123` and only the server can make sense of it. In a token-based auth, the data is a JWT. This token carries signed claims which can be used right away by the server to authenticate the user.
+
+Why would I choose a system over the other ? 
+
+Both systems have trade-offs. You would select one over the other depending on which trade-off you are comfortable making.
+
+Session-based auth trade-offs:
+- You can revoke a session immediately by deleting it from the session store.
+- You can track active sessions per user.
+- You can force logout from one device or all devices.
+- You can keep sensitive auth data off the client.
+BUT
+- Every authenticated request needs a session lookup.
+- The server needs shared session storage if you have multiple backend instances, often Redis or a database.
+
+Token-based auth trade-offs:
+- The server can verify requests without a session lookup.
+- Different services can verify the token if they know the signing key or public key.
+BUT
+- Revocation is harder. If a JWT is stolen, it may remain valid until it expires.
+- You must handle token expiry, refresh tokens, rotation, and storage carefully.
 
 </details>
 
@@ -226,8 +252,17 @@ The solution is to configure CORS in the backend to define which origins are all
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+An access token is a short-lived token, often valid for a few minutes, used to authenticate requests to protected APIs.
 
+A refresh token is a longer-lived token, often valid for days or weeks, used to obtain a new access token when the current one expires or is about to expire.
+
+Why have two different tokens?
+
+For security reasons. 
+
+An access token gives access to sensitive data, is sent frequently over the network and to different endpoints. Its exposure surface is large which makes it more likely to be stolen. This vulnerability is minimized by its lifetime: even if stolen, it would be valid only a few minutes before expiring. 
+
+On the other hand, the real powerful token - the refresh one - which is available for weeks, is sent rarely and only to the refresh endpoint. Its exposure surface is smaller. It's highly sensitive though because it an attacker steals a refresh token, then they can used it to obtain new access tokens.
 </details>
 
 ---
@@ -237,7 +272,9 @@ The solution is to configure CORS in the backend to define which origins are all
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+You never store plain passwords. If the database is compromised, plaintext passwords would immediately expose every user account. 
+
+Instead, you store is a password hash created with a hashing algorithm. For the algorithm, prefer a password-specific hashing algorithm such as `Argon2id`, `bcrypt` instead of general hashing algorithm like `SHA-256`. These algorithms are intentionally slow and make brute-force attacks harder.
 
 </details>
 
@@ -248,6 +285,10 @@ The solution is to configure CORS in the backend to define which origins are all
 <details>
 <summary>Reveal answer</summary>
 
-*TODO: draft answer.*
+Logs are often permanent and widely accessible. Leaking secrets in logs can be as dangerous as leaking secrets in source code.
+
+To avoid leaking sensitive data in logs or errors, you should never log secrets such as passwords, access tokens, refresh tokens, API keys, session IDs, or full personal data.
+
+In general, you want to provide minimal information to the client: a generic error message that is just enough for the user to know whether they need to do something. In production, you don't want to expose stack traces and debug errors to clients, because they can reveal implementation details, environment variables, file paths, or database information.
 
 </details>
