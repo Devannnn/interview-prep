@@ -5,11 +5,12 @@ Personal, version-controlled notes and exercises for technical interviews. Conte
 ## Content
 
 - Total questions: **130**
-- Questions by topic: Common 14, Python 32, Flask 20, React 14, SQL 19, Git 18, Cybersecurity 13.
+- Questions by topic: Web 10, DevOps 4, Python 32, Flask 20, React 14, SQL 19, Git 18, Cybersecurity 13.
 
 ## Table of contents
 
-- [Common](common/README.md)
+- [Web](web/README.md)
+- [DevOps](devops/README.md)
 - [Python](python/README.md)
 - [Flask](flask/README.md)
 - [React](react/README.md)
