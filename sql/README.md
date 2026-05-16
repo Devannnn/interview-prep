@@ -100,9 +100,9 @@ RIGHT JOIN also exists but in practice, most teams mostly use LEFT JOIN and swap
 
 `WHERE` and `HAVING` are both used to filter query results, but they apply at different stages.
 
-`WHERE` filters individual rows before grouping or aggregation.
+`WHERE` filters rows before grouping.
 
-`HAVING` filters groups after `GROUP BY`, often using aggregate functions like `COUNT`, `SUM`, or `AVG`.
+`HAVING` filters groups after grouping.
 
 
 ```sql
